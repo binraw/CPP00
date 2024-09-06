@@ -13,16 +13,35 @@
 
 #include "Contact.class.hpp"
 
-/*Contact::Contact(const std::string& n, const std::string& ln, const std::string& nn, const std::string& numb, const std::string& s) : name(n), lastname(ln)*/
-/*	, nickname(nn), nb(numb), secret(s))*/
-/*{*/
-/*}*/
 
 Contact::~Contact() {
 }
 
-
-void Contact::display() const
+void Contact::display() const 
 {
-std::cout << "Name: " << name << "\nLastname:" << lastname << "\nNickname" << nickname << "\nNumber :" << nb << "\nSecret:" << secret << std::endl;
+        std::cout << std::setw(10) << std::right << truncate(name) << '|'
+                  << std::setw(10) << std::right << truncate(lastname) << '|'
+                  << std::setw(10) << std::right << truncate(nickname) << '|'
+                  << std::endl;
+}
+
+void Contact::display_secret() const 
+{
+        std::cout << std::setw(10) << std::right << truncate(name) << '|'
+	 			<< std::endl
+                << std::setw(10) << std::right << truncate(lastname) << '|'
+ 				<< std::endl
+                << std::setw(10) << std::right << truncate(nickname) << '|'
+ 				<< std::endl
+				<< std::setw(10) << std::right << truncate(nb) << '|'
+				<< std::endl
+                  << std::setw(10) << std::right << truncate(secret) << '|'
+                  << std::endl;
+}
+
+std::string Contact::truncate(const std:: string str) const
+{
+	if (str.length() > 9)
+		return str.substr(0,9) + ".";
+	return str;
 }

@@ -24,42 +24,47 @@ int main(void)
 	std::string nickname;
 	std::string number;
 	std::string secret;
+	int index;
+
 	while (1)
 	{
 		std::cout << "Your command : ADD || SEARCH || EXIT" << std::endl;
-		std::cin >> buff;
-		if (buff == "ADD" || buff == "add")
+		std::getline(std::cin, buff);
+	  if (buff.empty()) 
 		{
-				std::cout << "Input your Name:";
-				std::cin >> name;
-				std::cout << "Input your Lastname:";
-				std::cin >> lastname;
-				std::cout << "Input your nickname:";
-				std::cin >> nickname;
-				std::cout << "Input your Number:";
-				std::cin >> number;
-				std::cout << "Input your Secrect:";
-				std::cin >> secret;
-
-			Contact person(name, lastname, nickname, number, secret);
+            std::cout << "Please enter a command: ";
+            std::getline(std::cin, buff);
+        }
+		if ((buff.compare("ADD") == 0 || buff.compare("add") == 0) && buff.length() == 3)
+		{
+			std::cout << "Input your Name:";
+			if (!std::getline(std::cin, name))
+				return (1);
+			std::cout << "Input your Lastname:";
+			if (!std::getline(std::cin, lastname))
+				return (1);
+			std::cout << "Input your nickname:";
+			if (!std::getline(std::cin, nickname))
+				return (1);
+			std::cout << "Input your Number:";
+			if (!std::getline(std::cin, number))
+				return (1);
+			std::cout << "Input your Secret:";
+			if (!std::getline(std::cin, secret))
+				return (1);
+			Contact person(index, name, lastname, nickname, number, secret);
 			phone.add_contact(person);
-
-							
-
 			std::cout << "You are enterred :" << "add comme commande" << std::endl;
 		}
-		else if (buff == "SEARCH" || buff == "search")
-			{
-			phone.display_all_contact();
-			std::cout << "you are enterred : " << "search" << std::endl;
-			}
+		else if ((buff == "SEARCH" || buff == "search") && buff.length() == 6)
+			phone.search_contact();
 		else if (buff == "EXIT" || buff == "exit")
-		std::cout << "You are enterred :" << "exit" << std::endl;
+			return (0);
 		else
-		return (1);
+			std::cout << "Please enter a command valide: \n";
 	}
 	return 0;
 	
 }
 
-//refaire le fait que les contact sont deja tous creer je dois juse changer les valeurs de chaque contacts en soit .
+

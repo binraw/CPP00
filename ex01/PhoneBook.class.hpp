@@ -25,19 +25,18 @@ class PhoneBook
 
 	public :
 
-	PhoneBook(void) : contact_count(0){
-	 for (int i = 0; i < 8; ++i) {
-        contacts[i] = Contact("", "", "", "", "");
-    }
+	PhoneBook(void) : contact_count(0), next_index(0){
 	}
 	~PhoneBook(void);
 
 	void add_contact(const Contact& contact);
 	void display_all_contact(void) const;
-	
+	void search_contact(void);
+
 	private:
 	Contact contacts[8];
-	int contact_count;
+	int contact_count = 0;
+	int	next_index = 0;
 
 };
 
