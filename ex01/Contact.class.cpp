@@ -13,8 +13,24 @@
 
 #include "Contact.class.hpp"
 
+Contact::Contact(): index(-1), name(""), lastname(""), nickname(""), nb(""), secret("")
+{
 
-Contact::~Contact() {
+}
+Contact::Contact(int index, std::string name,std::string lastname, std::string nickname, std::string nb, std::string secret)
+{       
+        this->index = index;
+        this->name = name;
+        this->lastname = lastname;
+        this->nickname = nickname;
+        this->nb = nb;
+        this->secret = secret;
+}
+
+
+Contact::~Contact()
+{
+
 }
 
 void Contact::display() const 
@@ -44,4 +60,13 @@ std::string Contact::truncate(const std:: string str) const
 	if (str.length() > 9)
 		return str.substr(0,9) + ".";
 	return str;
+}
+
+int	Contact::get_index(void) const
+{ 
+        return this->index; 
+}
+void    Contact::set_index(int idx)
+{
+        this->index = idx; 
 }

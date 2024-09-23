@@ -10,14 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "PhoneBook.class.hpp"
-
 #include "Contact.class.hpp"
+
+PhoneBook::PhoneBook(void)
+{
+	this->contact_count = 0;
+	this->next_index = 0;
+}
 
 PhoneBook::~PhoneBook(void)
 {
-std::cout << "destructor PhoneBook called" << std::endl;
+	std::cout << "destructor PhoneBook called" << std::endl;
 	return;
 }
 
@@ -55,23 +59,34 @@ void PhoneBook::display_all_contact(void) const
 	}
 }
 
-void PhoneBook::search_contact(void)
+int PhoneBook::search_contact(void)
 {
-        display_all_contact();
-		std::string input;
-        std::cout << "Enter the index of the contact to view details: ";
-        std::cin >> input;
- try {
-             int index = std::stoi(input);
-
-            if (index >= 0 && index < contact_count) {
-                contacts[index].display_secret();
-            } else {
-                std::cout << "Index out of range. Please enter a valid index." << std::endl;
-            }
-        } catch (const std::invalid_argument&) {
-            std::cout << "Invalid input. Please enter a valid index." << std::endl;
-        } catch (const std::out_of_range&) {
-            std::cout << "Index out of range. Please enter a valid index." << std::endl;
+	display_all_contact();
+	std::string input;
+	std::cout << "Enter the index of the contact to view details: ";
+	if (!std::getline(std::cin, input) || input.empty())
+		return 1;
+	try 
+	{
+		int index;
+		std::istringstream iss(input);
+		iss >> index;
+		if (index >= 0 && index < contact_count)
+		{
+			contacts[index].display_secret();
+		}
+		else
+		{
+			std::cout << "Index out of range. Please enter a valid index." << std::endl;
+		}
 	} 
+	catch (const std::invalid_argument&)
+	{
+		std::cout << "Invalid input. Please enter a valid index." << std::endl;
+	}
+	catch (const std::out_of_range&)
+	{
+		std::cout << "Index out of range. Please enter a valid index." << std::endl;
+	}
+	return 0;
 }

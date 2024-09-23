@@ -4,8 +4,8 @@ NAME = PhoneBook
 SRCS_FILE = Contact.class.cpp PhoneBook.class.cpp PhoneBook.cpp
 HEADER_FILE = Contact.class.hpp PhoneBook.class.hpp
 
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CC = c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 
 
@@ -22,7 +22,7 @@ ${NAME}: ${OBJS}
 
 
 
-%.o: %.c  Makefile ${HEADER_FILE}
+%.o: %.cpp  Makefile ${HEADER_FILE}
 	$(CXX) ${CFLAGS} -c $< -o $@
 
 clean:
